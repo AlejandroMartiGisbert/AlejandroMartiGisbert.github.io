@@ -703,3 +703,6 @@ text-align: center;
   right: 35px;
   }
 }*/
+html,body{
+    overflow-x: hidden;
+}
