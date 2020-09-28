@@ -107,6 +107,7 @@ header {
 }
 .intro h1 {
   font-size: 6em;
+ /* font-size:10vw;*/
   text-align: center;
   color: #fff;
   text-transform: uppercase;
@@ -341,7 +342,7 @@ footerlight {
 }
 @media only screen and (max-width:800px) {
   .intro h1 {
-    font-size: 4em;
+/*    font-size: 4em;*/
     line-height: 1.2;
   }
   .intro h2 {
@@ -679,7 +680,9 @@ body {
    Media Queries
 --------------------------- */
 @media (min-width: 768px) and (max-width: 1200px) {
-
+    .intro h1 {
+        font-size:10vw;
+    }
     .aboutUs-container {
     background-repeat: no-repeat;
     background-position: right;
@@ -705,4 +708,7 @@ text-align: center;
 }*/
 html,body{
     
+}
+.notice{
+    font-size: 12px;
 }

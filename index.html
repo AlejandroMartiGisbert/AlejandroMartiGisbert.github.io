@@ -19,8 +19,8 @@ and open the template in the editor.
         <header>
             <div class="intro">
                 <div>
-                    <h1 class="" style="font-size: 65.0909px;">Alejandro Martí</h1>
-                    <!--<h1>Alejandro Martí</h1>-->
+                    <h1 class="" >Alejandro Martí</h1>
+                    <!--<h1>Alejandro Martí</h1> style="font-size: 65.0909px;" -->
                     <h2>Computer Engineering Student & VideoGame Developer</h2>
                     <div class="contact-content">
                         <a class="button2" href="#about">My work</a>
@@ -201,16 +201,16 @@ and open the template in the editor.
             <div id = "about" ></div>
             <div class="wrapper">
                 <hr>
-                <section class="about">
+                <div class="about">
                         <div class="about-content">
                             <h3>About Me</h3>
                             <p>Welcome to my website! I'm a Game Developer fron Spain</p>
                             <p>I've learning about Game Development for 12 years.</p>
                             <p>Currently I'm studing Computer Engineering at The University of Valencia.</p>
                         </div>
-                </section>
+                </div>
                 <hr>
-            <section  id = "work" class="work">
+            <div  id = "work" class="work">
                 <div class="about-content">
                     <h3>Experience</h3>
                 </div>
@@ -249,9 +249,9 @@ and open the template in the editor.
                         <a class="button" href="#" target="_blank">view project</a>
                     </div>
                 </div>-->
-            </section>
+            </div>
                 <hr>
-            <section  id = "projects" class="work">
+            <div  id = "projects" class="work">
                 <div>
                     <h3>Projects</h3>
                 </div>
@@ -279,8 +279,8 @@ and open the template in the editor.
                         <a class="button" onclick="open2d()" target="_blank">view project</a>
                     </div>
                 </div>
-            </section>
-            <section  id = "art" class="work">
+            </div>
+            <div  id = "art" class="work">
                 <div class="about-content">
                     <h3>Art</h3>
                 </div>
@@ -302,11 +302,11 @@ and open the template in the editor.
                         <a class="button" onclick="open3d()">view project</a>
                     </div>
                 </div>
-            </section>
+            </div>
             <hr>
                 <!-- END MAIN -->
 
-         <!--   <section  id = "mas" class="work">
+         <!--   <div  id = "mas" class="work">
                 <div class="about-content">
                     <h3>3D Art</h3>
                 </div>
@@ -318,22 +318,23 @@ and open the template in the editor.
                 <a class="button" href="#" target="_blank">view project</a>
                         </div>
                 </div>
-            </section>
+            </div>
             End of "wrapper"-->
-            <section id = "contact" class="contact">
+            <div id = "contact" class="contact">
                 <div class="contact-content">
                     <h4>Have a project in mind? Email me:
-                    <a class="email" href="mailto:alejandromartigisbert@gmail.com">alejandromartigisbert@gmail.com</a></h4>
+                  <!--  <a class="email" href="mailto:alejandromartigisbert@gmail.com">alejandromartigisbert@gmail.com</a></h4>-->
                 </div>
-            </section>
+            </div>
             </div>
         </div>
         <footer>
 	<div class="footer-content">
             <p class="credit">© Copyright 2020 Alejandro Martí Gisbert.<br>
             Designed and Developed by Alejandro Marti Gisbert.<br>
-            This website is not sponsored by or affiliated with Unity Technologies or its affiliates. ”Unity” is a trademark or registered trademark of Unity Technologies or its affiliates in the U.S. and elsewhere.”</p>
-           <!-- <ul class="social">
+            <div class="notice">  This website is not sponsored by or affiliated with Unity Technologies or its affiliates. ”Unity” is a trademark or registered trademark of Unity Technologies or its affiliates in the U.S. and elsewhere.”</div> 
+           <!--<button onclick="darkModeToggler()">Toggle dark mode</button>
+            <!-- <ul class="social">
                 <li>
                     <a href="#" target="_blank">twitter.</a>
                 </li>
@@ -347,11 +348,6 @@ and open the template in the editor.
                     <a href="#" target="_blank">linkedin.</a>
                 </li>
             </ul>-->
-            <ul class="social">
-                <li>
-                    <button onclick="darkModeToggler()">Toggle dark mode</button>
-                </li>
-            </ul>
 	</div>
     </footer>
     </body>
