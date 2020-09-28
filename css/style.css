@@ -679,6 +679,26 @@ body {
 /*
    Media Queries
 --------------------------- */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
+
 @media (min-width: 768px) and (max-width: 1200px) {
     .intro h1 {
         font-size:10vw;
@@ -689,6 +709,9 @@ body {
     background-size: auto 59%;
     background-position-y: 150px;
     }
+    .topnav {
+        padding: 0px 0px;
+      }
 }
 @media (max-width: 768px) {
 .navStyle {
@@ -710,5 +733,5 @@ html,body{
     
 }
 .notice{
-    font-size: 12px;
+    font-size: 10px;
 }
