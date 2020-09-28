@@ -106,8 +106,8 @@ header {
   transform: translate(-50%, -50%);
 }
 .intro h1 {
-  font-size: 6em;
- /* font-size:10vw;*/
+  /* font-size: 6em;*/
+  font-size:5vw;
   text-align: center;
   color: #fff;
   text-transform: uppercase;
