@@ -339,6 +339,9 @@ footerlight {
   .footer-content {
     padding: 3.5%;
   }
+  .topnav {
+    padding: 3.5%;
+  }
 }
 @media only screen and (max-width:800px) {
   .intro h1 {
@@ -346,7 +349,7 @@ footerlight {
     line-height: 1.2;
   }
   .intro h2 {
-    font-size: 1.8em;
+    font-size: 10vw;
     padding-top: 3%;
   }
   .about p {
@@ -681,6 +684,9 @@ body {
 --------------------------- */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .topnav {
+        padding: 10px 0px;
+      }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -709,16 +715,13 @@ body {
     background-size: auto 59%;
     background-position-y: 150px;
     }
-    .topnav {
-        padding: 0px 0px;
-      }
 }
 @media (max-width: 768px) {
-.navStyle {
-float: right;
-width: auto; 
-text-align: center;
-}
+    .navStyle {
+    float: right;
+    width: auto; 
+    text-align: center;
+    }
 }
 /*@media screen and (max-height: 4500px) {
   .overlay2 {overflow-y: auto;}
