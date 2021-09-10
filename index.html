@@ -1,374 +1,241 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content ='IE=edge'>
-        <meta name="mobile-web-app-capable" content="yes">
-        <title>Alejandro Martí Gisbert personal webpage and portfolio</title>
-        <meta name="description" content="Welcome to my website, I'm Alejandro Martí, here you can find my work,projects and experiments in game development.">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Alejandro Martí Gisbert" />
-        <meta name="google-site-verification" content="4DdpKMUaRZKwip-zh_3otdEvI3chgPxh0FxGZjdYYkM" />
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" type="image/png" href="img/logo.ico">
-        <script src="js/script.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <header>
-            <div class="intro">
-                <div>
-                    <h1 class="" >Alejandro Martí Gisbert</h1>
-                    <!--<h1>Alejandro Martí</h1> style="font-size: 65.0909px;" -->
-                    <h2>Computer Engineering Student & VideoGame Developer</h2>
-                    <div class="contact-content">
-                        <a class="button2" href="#about">Portfolio</a>
-                    </div>    
-                </div>
-            </div>
-        </header>
-        <div id="myNav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	<head>
+		<title>Alejandro Marti</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+                <link rel="icon" type="image/png" href="images/logo.ico">
+                <script src="https://kit.fontawesome.com/35e3794076.js" crossorigin="anonymous"></script>
+	</head>
+	<body class="is-preload">
 
-        <!-- Overlay content -->
-        <div class="overlay-content">
-            <a onclick="openNav()" href="#">Home</a>
-            <a onclick="openNav()" href="#about">About</a>
-            <a onclick="openNav()" href="#experience">Experience</a>
-            <a onclick="openNav()" href="#projects">Projects</a>
-            <a onclick="openNav()" href="#art">3D</a>
-            <a onclick="openNav()" href="#contact">Contarct</a>
-        </div>
-      </div>
-        <!--3D Overlay-->
-        <div id="Gamedev" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closegame()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" onclick="close3d()" target="_blank">Close</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--3D Overlay-->
-        <div id="3dtab" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="close3d()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" onclick="close3d()" target="_blank">Close</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-         <!--3D Overlay-->
-        <div id="exp" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closeexp()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" onclick="closeexp()" target="_blank">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <!--Portfolio-->
-        <div id="website" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closeweb()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Web Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" onclick="closeweb()" target="_blank">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <!--Tower Defense-->
-        <div id="tower" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closetower()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" onclick="closetower()" href="#" target="_blank">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <!--html5-->
-        <div id="html5" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closehtml5()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" href="#" target="_blank">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <!--2D Overlay-->
-        <div id="2dtab" class="overlay2">
-            <div class = "container" >
-                <a href="javascript:void(0)" class="closebtn" onclick="close2d()">&times;</a>
-                <div class="overlay2-content">
-                    <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                    <div class="text-box">
-                        <div class="text-box-content">
-                            <h3>Game Developing</h3>
-                            <p>Unity Game Engine: 2012-2020</p>
-                            <p>Unreal Engine: 2019-2020</p>
-                            <p>Renpy: 2019-2020</p>
-                            <a class="button" href="#" target="_blank">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <div class = "barbig">
-            <div class="topnav" id ="navigation">
-                <!-- Centered link 
-                <div class="topnav-centered">
-                  <a href="#home" class="active">Home</a>
-                </div> -->
-                <!-- Left-aligned links (default) -->
-                <div class="topnav-left">
-                    <b class= "fill" >  </b>
-                    <a href="#">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#art">3D</a>
-                    <a href="#contact">Contact</a>
-                    
-                </div>
-                <a href="javascript:void(0);" class="icon" onclick="openNav()"><i class="fa fa-bars"></i></a>
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="container">
+					<li><a href="#top">About</a></li>
+					<li><a href="#work">Work</a></li>
+					<li><a href="#portfolio">Portfolio</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
 
-                <!-- Right-aligned links -->
-                
+		<!-- Home -->
+			<article id="top" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-5-large col-12-medium">
+							<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
+						</div>
+						<div class="col-8 col-7-large col-12-medium">
+							<header>
+								<h1>Hi. I'm <strong>Alejandro Martí</strong>.</h1><i class="fas fa-rocket"></i><i class="fab fa-unity"></i>
+							</header>
+							<p>A Computer Engineering student at the <a href="https://www.uv.es/">University of Valencia</a>. </p>
+							<a href="#work" class="button large scrolly">Learn about what I do</a>
+						</div>
+					</div>
+				</div>
+			</article>
 
-              </div>
-        </div>
-        <div id = "about" ></div>
-        <main>
-        <div class = "container" >
-            
-            <div class="wrapper">
-                <hr>
-                <section class="about">
-                        <div class="about-content">
-                            <h3>About Me</h3>
-                            <p>Welcome to my website! I'm a Game Developer fron Spain</p>
-                            <p>I've learning about Game Development for 12 years.</p>
-                            <p>Currently I'm studing Computer Engineering at The University of Valencia.</p>
-                            <a href="https://alejandromartigisbert.weebly.com/">My old website </a>
-                            <a href="https://youtube.com/channel/UCzXVy7-Thtkssg6bZZq6vZg">Youtube </a>
-                            <a href="https://alejandromg.itch.io">Itch.io </a>
-                        </div>
-                </section><div id = "experience" ></div>
-                <hr>
-                
-            <section  id = "work" class="work">
-                <div class="about-content">
-                    <h3>Experience</h3>
-                </div>
-                <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Game Developing</h3>
-                        <p>Unity Game Engine: 2012-2020</p>
-                        <p>Unreal Engine: 2019-2020</p>
-                        <p>Renpy: 2019-2020</p>
-                        <a class="button" onclick="opengame()" target="_blank">Read More</a>
-                    </div>
-                </div>
-                <div class="image-area right"><img class="imgresponsive" alt="Website" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Programming</h3>
-                        <p>Projects from College.</p>
-                        <p>C++, Java, HTML5, Javascript, CSS</p>
-                        <a class="button" onclick="open2d()" target="_blank">view project</a>
-                    </div>
-                </div>
-               <!-- <div class="image-area right"><img class="imgresponsive" alt="Website" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Unreal Engine</h3>
-                        <p>Projects created using the Unreal Game Engine.</p>
-                        <a class="button" href="#" target="_blank">view project</a>
-                    </div>
-                </div>
-                <div class="image-area left"><img class="imgresponsive" alt="Website" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Renpy</h3>
-                        <p>Projects created using Renpy.</p>
-                        <a class="button" href="#" target="_blank">view project</a>
-                    </div>
-                </div>-->
-            </section>
-                <div id = "projects" ></div>
-                 <br>
-                <p>
-            <section  id = "projects2" class="work">
-                <div>
-                    <h3>Projects</h3>
-                </div>
-                <div class="image-area right"><img alt="Website" class="imgresponsive" src="img/Portfolio.jpg"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Portfolio Website</h3>
-                        <p>HTML5,CSS and Javascript.</p>
-                        <a class="button" onclick="openweb()" target="_blank">View Project</a>
-                    </div>
-                </div>
-                <div class="image-area left"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>Tower Defense</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a class="button" onclick="open2d()" target="_blank">view project</a>
-                    </div>
-                </div>
-                 <div class="image-area right"><img alt="Website" class="imgresponsive" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>HTML5 Games</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a class="button" onclick="open2d()" target="_blank">view project</a>
-                    </div>
-                </div>
-            </section>
-                <div id = "art" ></div>
-                <hr>
-            <section  id = "art2" class="work">
-                <div class="about-content">
-                    <h3>Art</h3>
-                </div>
-                <div class="image-area left"><img class="imgresponsive" alt="Website" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>2D</h3>
-                        <p>C++,C#.</p>
-                        <a class="button" onclick="open2d()">view project</a>
-                        
-                       <!-- <a class="button" href="#" target="_blank">view project</a>-->
-                    </div>
-                </div>
-                <div class="image-area right"><img class="imgresponsive" alt="Website" src="img/background.png"></div>
-                <div class="text-box">
-                    <div class="text-box-content">
-                        <h3>3D Modeling</h3>
-                        <p>Blender Projects.</p>
-                        <a class="button" onclick="open3d()">view project</a>
-                    </div>
-                </div>
-            </section>
-            <hr>
-                <!-- END MAIN -->
+		<!-- Work -->
+			<article id="work" class="wrapper style2">
+				<div class="container">
+					<header>
+						<h2>What I do.</h2>
+					</header>
+					<div class="row aln-center">
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon solid featured fa-gamepad"></span>
+								<h3>Game Development</h3>
+								<p>I love creating videogames and interactive aplications.</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon solid featured fa-cubes"></span>
+								<h3>3D Models</h3>
+								<p>It's useful to be able to quickly prototype some 3D models.</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon solid featured fa-code"></span>
+								<h3>Web Development</h3>
+								<p>I have experience in front-end and back-end web development.</p>
+							</section>
+						</div>
+					</div>
+					<footer>
+						<p>Want to see what projects I have created?</p>
+						<a href="#portfolio" class="button large scrolly">See some of my recent work</a>
+					</footer>
+				</div>
+			</article>
+		<!-- Portfolio -->
+			<article id="portfolio" class="wrapper style3">
+				<div class="container" id="imagegallery">
+					<header>
+						<h2>Here is some projects I made recently.</h2>
+						<p>Small applications, 3D models and college projects.</p>
+					</header>
+                                        <div class="projectnav unselectable">
+                                            <a href="#"  onclick="return false;" class="showall unselectable">All</a>
+                                            <a href="#"  onclick="return false;" class="showvideogame">Videogame</a>
+                                            <a href="#"  onclick="return false;" class="showcollege">College</a>
+                                            <a href="#"  onclick="return false;" class="show3d">3D</a>
+                                        </div>
+					<div class="row">
+						<div id="project1" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://alejandromg.itch.io/tower-defense-demo" target="_blank" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+                                                                <h3><a href="https://alejandromg.itch.io/tower-defense-demo" target="_blank">Tower Defense <i class="fab fa-unity"></i></a></h3>
+								<p>3D Tower Defense with custom models.</p>
+							</article>
+						</div>
+                                                <div id="project2" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://alejandromg.itch.io/the-shadow-game" target="_blank" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+								<h3><a href="https://alejandromg.itch.io/the-shadow-game" target="_blank">The Shadow Game <i class="fab fa-unity"></i></a></h3>
+								<p>Try to fit a shadow to an image.</p>
+							</article>
+						</div>
+						<div id="project3" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://alejandromg.itch.io/basic-tetris" target="_blank" class="image featured"><img src="images/pic11.jpg" alt="" /></a>
+								<h3><a href="https://alejandromg.itch.io/basic-tetris" target="_blank">Tetris <i class="fab fa-unity"></i></a></h3>
+								<p>Simple Tetris clone.</p>
+							</article>
+						</div>
+						<div id="project4" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://youtu.be/YYdjPyvYwLE" target="_blank" class="image featured"><img src="images/CovidApp.jpg" alt="" /></a>
+								<h3><a href="https://youtu.be/YYdjPyvYwLE" target="_blank">Covid21</a></h3>
+								<p>Android application to check Covid cases in the Comunitat Valenciana.</p>
+							</article>
+						</div>
+						<div id="project5" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://youtu.be/5YvshnsjDJs" target="_blank" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+								<h3><a href="https://youtu.be/5YvshnsjDJs" target="_blank">Paint</a></h3>
+								<p>Android application to paint alone or with friends.</p>
+							</article>
+						</div>
+						<div id="project6" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://youtu.be/Vb2cMSturNw" target="_blank" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+								<h3><a href="https://youtu.be/Vb2cMSturNw" target="_blank">Pseudocode translator</a></h3>
+								<p>A psudocode tranlator to Assembly with Cup and Flex.</p>
+							</article>
+						</div>
+                                                
+                                                <div id="project7" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="desertpack.html" target="_blank" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+								<h3><a href="desertpack.html" target="_blank">Desert Pack</a></h3>
+								<p>Hexagonal Mini Environment.</p>
+							</article>
+						</div>
+						<div id="project8" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="https://alejandromg.itch.io/isometric-rooms-demo"  target="_blank" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+								<h3><a href="https://alejandromg.itch.io/isometric-rooms-demo" target="_blank">Rooms</a></h3>
+								<p>Isometric Rooms.</p>
+							</article>
+						</div>
+						<div id="project9" class="col-4 col-6-medium col-12-small">
+							<article class="box style2 project">
+								<a href="#" target="_blank" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+								<h3><a href="#" target="_blank">The Dungeon</a></h3>
+								<p>Isometric Dungeon.</p>
+							</article>
+						</div>
+					</div>
+					<footer>
+						<p>Want to see everything I have ever done?</p>
+						<a href="projects.html" class="button large scrolly">See all Projects</a>
+					</footer>
+				</div>
+			</article>
+		<!-- Contact -->
+			<article id="contact" class="wrapper style4">
+				<div class="container medium">
+					<header>
+						<h2>CONTACT</h2>
+						<p>Do you have any questions, a project in mind?, contact me:</p>
+					</header>
+					<div class="row">
+						<div class="col-12">
+                                                    <form action="https://formspree.io/f/xoqyynya" method="POST">
+                                                        <div class="row">
+                                                                <div class="col-6 col-12-small">
+                                                                        <input type="text" name="name" id="name" placeholder="Name" />
+                                                                </div>
+                                                                <div class="col-6 col-12-small">
+                                                                        <input type="email" name="_replyto" id="email" placeholder="Email" />
+                                                                </div>
+                                                                <div class="col-12">
+                                                                        <input type="text" name="subject" id="subject" placeholder="Subject" />
+                                                                </div>
+                                                                <div class="col-12">
+                                                                        <textarea name="message" id="message" placeholder="Message"></textarea>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <ul class="actions">
+                                                                            <li><input type="submit" value="Send Message" /></li>
+                                                                            <li><input type="reset" value="Clear Form" class="alt" /></li>
+                                                                    </ul>
+                                                                </div>
+                                                        </div>
+                                                    </form>
+						</div>
+						<div class="col-12">
+							<hr />
+							<h3>Find me on ...</h3>
+							<ul class="social">
+								<li><a href="https://twitter.com/marti_gisbert" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://www.youtube.com/channel/UCzXVy7-Thtkssg6bZZq6vZg" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+								<li><a href="https://www.linkedin.com/in/alex-m-350b3421b/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://alejandromg.itch.io/" class="icon brands fa-itch-io"><span class="label">itchio</span></a></li>
+								<li><a href="https://github.com/AlejandroMartiGisbert" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								<!--
+        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a></li>
+								
+								<li><a href="#" class="icon solid fa-rss"><span>RSS</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram"><span>Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-foursquare"><span>Foursquare</span></a></li>
+								<li><a href="#" class="icon brands fa-skype"><span>Skype</span></a></li>
+								<li><a href="#" class="icon brands fa-soundcloud"><span>Soundcloud</span></a></li>
+								<li><a href="#" class="icon brands fa-youtube"><span>YouTube</span></a></li>
+								<li><a href="#" class="icon brands fa-blogger"><span>Blogger</span></a></li>
+								<li><a href="#" class="icon brands fa-flickr"><span>Flickr</span></a></li>
+								<li><a href="#" class="icon brands fa-vimeo"><span>Vimeo</span></a></li>
+								-->
+							</ul>
+							<hr />
+						</div>
+					</div>
+					<footer>
+						<ul id="copyright">
+							<li>&copy; Alejandro Martí Gisbert. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                                                        
+						</ul>
+                                                <ul id="copyrightunity">
+                                                         <li id = "unitycopyright">&copy; This website is not sponsored by or affiliated with Unity Technologies or its affiliates. ”Unity” is a trademark or registered trademark of Unity Technologies or its affiliates in the U.S. and elsewhere.</li>
+                                                </ul>
+                                            </footer>
+				</div>
+			</article>
 
-         <!--   <div  id = "mas" class="work">
-                <div class="about-content">
-                    <h3>3D Art</h3>
-                </div>
-            <div class="image-area left"><img alt="Website" src="img/image.jpg"></div>
-                <div class="text-box">
-                        <div class="text-box-content">
-                                <h3>Handcrafted Binder</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a class="button" href="#" target="_blank">view project</a>
-                        </div>
-                </div>
-            </div>
-            End of "wrapper"-->
-         <div>
-             <img src="img/Assets.png" alt=""/>
-         </div>
-            <div id = "contact" class="contact">
-                <div class="contact-content">
-                    <h4>Have a project in mind? Email me:
-                  <!--  <a class="email" href="mailto:alejandromartigisbert@gmail.com">alejandromartigisbert@gmail.com</a></h4>-->
-                </div>
-            </div>
-            </div>
-        </div>
-        </main>
-        <footer>
-	<div class="footer-content">
-            <p class="credit">© Copyright 2020 Alejandro Martí Gisbert.<br>
-            Designed and Developed by Alejandro Marti Gisbert.<br>
-            <div class="notice">  This website is not sponsored by or affiliated with Unity Technologies or its affiliates. ”Unity” is a trademark or registered trademark of Unity Technologies or its affiliates in the U.S. and elsewhere.”</div> 
-           <div class="notice">  This website is still under contruction”</div> 
-           
-            <!--<button onclick="darkModeToggler()">Toggle dark mode</button>
-            <!-- <ul class="social">
-                <li>
-                    <a href="#" target="_blank">twitter.</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">pinterest.</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">youtube.</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">linkedin.</a>
-                </li>
-            </ul>-->
-	</div>
-    </footer>
-    </body>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+                        <script src="assets/js/extra.js" type="text/javascript"></script>
+	</body>
 </html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3D Viewer</title>
+		<style>
+			body { margin: 0; }
+                          
+                            html, body {
+                                height: 100%;
+                                margin: 0;
+                              }
+
+                              body {
+                                background: black;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                              }
+                              .mysidemenu{
+                                  width: 220px;
+                                  
+                                  left: 10px;
+                              }
+                               .mysidemenudark{
+                                  width: 220px;
+                                  color:black;
+                              }
+                              #size{
+                                  width: 60px;
+                              }
+                              #iniciar, #update, #load ,#save{
+                                  width:100%;
+                              }
+
+                              .col {
+                                flex: 1; /* additionally, equal width */
+                                color:white;
+                                padding: 1em;
+                                border: solid;
+                              }
+                              #padding {
+                                padding: 50px;
+                                display: flex; /* equal height of the children */
+                              }
+                              input[type="number"] {
+                                width:40px;
+                             }
+                             .centrado {
+                                text-align: center;
+                            }
+                            button{
+                                margin: 5px;
+                            }
+		</style>
+                     <script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script>
+    <link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'/>
+    
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
+    
+    
+    <script>
+      // var scene = new THREE.Scene();
+    	//Round a float value to x.xx format
+        var currentfigura;
+        var miid;
+        var id = 1;
+        var idselected;
+    	function roundWithTwoDecimals(value)
+    	{
+    		return (Math.round(value * 100)) / 100;
+    	}
+    
+    	//Handle click on any group member
+    	function handleGroupClick(event)
+    	{
+            $("shape").each(function() {
+        		$(this).attr("onclick", "handleSingleClick(this)");
+        	});
+    		//Mark hitting point
+    		$('#marker').attr('translation', event.hitPnt);
+    		console.log(event);
+    		
+    		//Display coordinates of hitting point (rounded)
+    		var coordinates = event.hitPnt;
+    		$('#coordX').html(roundWithTwoDecimals(coordinates[0]));
+    		$('#coordY').html(roundWithTwoDecimals(coordinates[1]));
+    		$('#coordZ').html(roundWithTwoDecimals(coordinates[2]));
+    	}
+    	
+    	//Handle click on a shape
+    	function handleSingleClick(shape)
+    	{
+    		$('#lastClickedObject').html($(shape).attr("def"));
+                currentfigura = shape;
+                miid = $('#lastClickedObject').html($(shape).attr("id"));
+    	}
+        
+        $(document).ready(function(){
+        	//Add a onclick callback to every shape
+        	$("shape").each(function() {
+        		$(this).attr("onclick", "handleSingleClick(this)");
+        	});
+        });
+        function CrearEsfera(){
+            var posx = document.getElementById("posx").value;
+            var posy = document.getElementById("posy").value;
+            var posz = document.getElementById("posz").value;
+            var rad = document.getElementById("rad").value;
+             var color = document.getElementById("colorForma").value;
+            document.querySelector('#scene').insertAdjacentHTML(
+              'afterbegin',
+              ` <Transform DEF="sphereTrafo" translation="`+``+ posx+` `+ posy +` `+ posz+`">
+                                    <Shape DEF="`+ id +`" id="`+ id +`">
+                                        <Appearance DEF="sphereApp">
+                                            <Material diffuseColor="`+color+`"></Material>
+                                        </Appearance>
+                                        <Sphere  radius='`+rad+`' DEF="sphere"></Sphere>
+                                    </Shape>
+                                </Transform>`      
+            );
+            id +=1;
+        }
+        function CrearCubo(){
+            var posx = document.getElementById("posx").value;
+            var posy = document.getElementById("posy").value;
+            var posz = document.getElementById("posz").value;
+             var color = document.getElementById("colorForma").value;
+            document.querySelector('#scene').insertAdjacentHTML(
+              'afterbegin',
+              ` <Transform DEF="boxTrafo" translation="`+``+ posx+` `+ posy +` `+ posz+`">
+                <Shape DEF="`+ id +`" id="`+ id +`">
+                    <Appearance DEF="boxApp">
+                        <Material id="`+ id +`mat" diffuseColor="`+color+`"></Material>
+                    </Appearance>
+                    <Box DEF="box"></Box>
+                </Shape>
+            </Transform>`      
+            );
+            id +=1;
+        }
+        function CrearCono(){
+            var posx = document.getElementById("posx").value;
+            var posy = document.getElementById("posy").value;
+            var posz = document.getElementById("posz").value;
+            var color = document.getElementById("colorForma").value;
+             var br = document.getElementById("cone1").value;
+              var h = document.getElementById("cone2").value;
+            document.querySelector('#scene').insertAdjacentHTML(
+              'afterbegin',
+              ` <Transform DEF="coneTrafo" translation="`+``+ posx+` `+ posy +` `+ posz+`">
+                    <Shape DEF="`+ id +`" id="`+ id +`">
+                        <Appearance DEF="coneApp">
+                            <Material diffuseColor="`+color+`"></Material>
+                        </Appearance>
+                        <Cone DEF="cone"  bottomRadius="`+br+`" height="`+h+`" ></Cone>
+                    </Shape>
+                </Transform>`      
+            );
+        id +=1;
+        }
+        function CrearToro (x,y,z) {
+            var posx = document.getElementById("posx").value;
+            var posy = document.getElementById("posy").value;
+            var posz = document.getElementById("posz").value;
+            var color = document.getElementById("colorForma").value;
+            var toroa = document.getElementById("toroa").value;
+            var torob = document.getElementById("torob").value;
+            document.querySelector('#scene').insertAdjacentHTML(
+              'afterbegin',
+              ` <Transform DEF="toro" translation="`+``+ posx+` `+ posy +` `+ posz+`">
+                    <Shape DEF="`+ id +`" id="`+ id +`">
+                        <Appearance DEF="coneApp"">
+                            <Material diffuseColor="`+color+`"></Material>
+                        </Appearance>
+                        <Torus DEF="torus" innerRadius="`+``+ toroa +`" outerRadius="`+``+ torob +`">
+                    </Shape>
+                </Transform>`      
+            );
+        id +=1;
+          }
+          function editarFigura(){
+              var transx = document.getElementById("transx").value;
+              var transy = document.getElementById("transy").value;
+              var transz = document.getElementById("transz").value;
+              var escx = document.getElementById("escx").value;
+              var escy = document.getElementById("escy").value;
+              var escz = document.getElementById("escz").value;
+              var color = document.getElementById("modfcolor").value;
+                
+            //  document.getElementById("" + document.getElementById("lastClickedObject").innerHTML).children[0].setAttribute('diffuseColor',"red");
+            idselected = document.getElementById("lastClickedObject").innerHTML;
+            //document.getElementById(idselected).parentElement.m=escx + " " + escy + " " + escz;
+            document.getElementById(idselected).parentElement.scale=escx + " " + escy + " " + escz;
+            document.getElementById(idselected).parentElement.translation = transx + " " + transy + " " + transz;
+              document.getElementById("" + document.getElementById("lastClickedObject").innerHTML).children[0].children[0].setAttribute('diffuseColor',color);
+              console.log("ID:" + document.getElementById("lastClickedObject").innerHTML);
+          }
+        </script>
+	</head>
+	<body>
+            <div id ="padding">
+                    <div class ="col">
+                        <form>
+                            <fieldset>
+                                <legend>Insertar figura</legend>
+                                <button type='button' onClick="CrearCubo()">Cubo</button>
+                                <a>Lado:</a>
+                                <input type="number" value="1">
+                                <br>
+                                <button type='button' onClick="CrearEsfera()">Esfera</button>
+                                <a>Radio</a>
+                                <input id="rad" type="number" value="1">
+                                <br>
+                                <button  type='button' onClick="CrearCono()">Cono</button>
+                                <a>Radio</a>
+                                <input id="cone1" type="number" value="1">
+                                <a>Alto</a>
+                                <input id="cone2" type="number" value="1">
+                                <br>
+                                <button type='button' onClick="CrearToro()" >Toro</button>
+                                <a>R.int</a>
+                                <input id="toroa" type="number" value="1">
+                                <a>R.ext</a>
+                                <input id="torob" type="number" value="1">
+                                <br>
+                                <a>Color</a>
+                                <input id="colorForma" type="color" value="#ff0000">
+                                 <a>Posicion</a>
+                                <br>
+                                <a>Posicion</a>
+                                X <input id="posx" type="number" value="1" >Y <input type="number" id="posy" value="1">Z <input id="posz" type="number" value="1">
+                                <br>
+                                
+                            </fieldset>
+                            <div class ="centrado">
+                                <button disabled type='button'>Insertar</button>
+                            </div>
+                             
+                            <fieldset>
+                                <legend>Datos:</legend>
+                                <fieldset>
+                                    <legend>Objeto Seleccionado:</legend>
+                                            <span id="lastClickedObject">-</span>
+
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Coordenadas:</legend>
+                                    <table style="font-size:1em;">
+                                                    <tr><td>X: </td><td id="coordX">-</td></tr>
+                                                    <tr><td>Y: </td><td id="coordY">-</td></tr>
+                                                    <tr><td>Z: </td><td id="coordZ">-</td></tr>
+                                            </table>
+
+                                </fieldset>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Editar figura</legend>
+                                <a>Cambiar color</a>
+                                <input id="modfcolor" type="color">
+                                <br>
+                                Transladar
+                                <br>
+                                X <input id="transx" type="number" value="1" >Y <input id="transy" type="number" value="1">Z <input id="transz" type="number" value="1">
+                                <br>
+                                Escalar
+                                <br>
+                                X <input id="escx" type="number" value="1" >Y <input id="escy" type="number" value="1">Z <input id="escz" type="number" value="1">
+                                <br>
+                            </fieldset>
+                            <div class ="centrado">
+                              <button type='button' onClick="editarFigura()">Aplicar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id ="right" class ="col">Espacio 3D
+                        <X3D  id="boxes" showStat="false" showLog="false" x="0px" y="0px" width="500px" height="500px">
+                        <Scene id="grupo">
+                            <Viewpoint position="-2.25680 3.36560 14.62828" orientation="-0.60104 -0.28053 0.74837 0.40903"></Viewpoint>
+                             <inline url="x3d/axis.x3d"></inline>
+                             <inline url="x3d/grid_20x20.x3d"></inline>
+                             <Group id="scene" onclick="handleGroupClick(event)">
+
+                            </Group>
+
+                            <Transform id="marker" scale=".15 .15 .15" translation="100 0 0">
+                                <Shape>
+                                    <Appearance>
+                                        <Material diffuseColor="#FFD966"></Material>
+                                    </Appearance>
+                                    <Sphere></Sphere>
+                                </Shape>
+                            </Transform>
+
+                        </Scene>
+                    </X3D>
+                        <br>
+                        <br>
+                        Primero se modifica los parametros para crear la figura, luego se hace click 
+                        <br>
+                        en el botón con el nombre de la figura para insertarla.
+                        <br>
+                        Después se puede hacer click en ella y se pueden modificar sus parametros 
+                        <br>
+                        con aplicar
+                    </div>
+                </div>
+            <div id ="todobody">
+
+
+            
+            </div>
+            
+		<script src="js/three.js"></script>
+                
+                
+	</body>
+</html>

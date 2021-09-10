@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ping Pong</title>
+  <meta charset="UTF-8">
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mysidemenu{
+      width: 220px;
+      color:white;
+      left: 10px;
+  }
+   .mysidemenudark{
+      width: 220px;
+      color:black;
+  }
+  #size{
+      width: 60px;
+  }
+  #iniciar, #update, #load ,#save{
+      width:100%;
+  }
+  </style>
+</head>
+<body>
+    <div id ="mysidemenu" class="mysidemenu">
+                <form>
+                    <fieldset>
+                        <legend>Nombre de los jugadores</legend>
+                        <b>Nombre Jugador 1</b>
+                        <input type="text" id = "player1" value = "Jugador 1">
+                        <b>Nombre Jugador 2</b>
+                        <input type="text" id = "player2" value = "Jugador 2">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Dificultad</legend>
+                        <b>Tamaño pala</b>
+                        <input type="number" id = "size" value="80">
+                        <b>Velocidad</b>
+                        <input type="number" id = "speed" value="5" min="0" max="6">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Color Jugador 1</legend>
+                        <input type="color" id = "color1" value ="#0026ff">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Color Jugador 2</legend>
+                        <input type="color" id = "color2" value ="#ff0800">
+                        
+                    </fieldset>
+                    <fieldset>
+                        <legend>Color Bola</legend>
+                        <input type="color" id = "colorball" value ="#ffffff">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Color Fondo</legend>
+                        <input type="color" id = "colorbackground">
+                    </fieldset>
+                </form>
+                <fieldset>
+                        <legend>Controles</legend>
+                        <b>Jugador 1</b>
+                        <select name="control1" id="control1">
+                          <option value="WASD">WASD</option>
+                          <option value="← ↑ → ↓">← ↑ → ↓</option>
+                        </select>
+                        <b>Jugador 2</b>
+                        <select name="control2" id="control2">
+                          <option value="← ↑ → ↓">← ↑ → ↓</option>
+                          <option value="WASD">WASD</option>
+                        </select>
+                </fieldset>
+                <fieldset>
+                        <legend>Opciones</legend>
+                        <button id ="iniciar" onClick="StartGame()">Iniciar partida</button>
+                        <button id ="update" onClick="ReloadGame()">Recargar</button>
+                        <button id ="load" onClick="LoadPreferences()">Cargar Preferencias</button>
+                        <button id ="save" onClick="SavePreferences()">Guardar Preferencias</button>
+                </fieldset>
+                
+            </div>
+<canvas width="750" height="585" id="game"></canvas>
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const grid = 15;
+
+var tampala = 30 + grid * 5;
+var maxpala = canvas.height - grid - tampala;
+
+var paddleSpeed = 6;
+var ballSpeed = 5;
+
+var color1;
+var color2;
+var color3;
+var player1 = "Player 1:";
+var player2 = "Player 2:";
+var controls1 ="WASD";
+var controls2 ="← ↑ → ↓";
+var score1 =0;
+var score2 =0;
+var colorlines="lightgrey";
+
+// Campo
+  ctx.fillStyle = colorlines;
+  ctx.fillRect(0, 0, canvas.width, grid);
+  ctx.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
+
+// Linea medio
+for (let i = grid; i < canvas.height - grid; i += grid * 2) {
+    ctx.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
+}
+//Propiedades de la pala izquierda
+const pala1 = {
+  x: grid * 2,
+  y: canvas.height / 2 - tampala / 2,
+  width: grid,
+  height: tampala,
+  dy: 0
+};
+//Propiedades de la pala derecha
+const pala2 = {
+  x: canvas.width - grid * 3,
+  y: canvas.height / 2 - tampala / 2,
+  width: grid,
+  height: tampala,
+  dy: 0
+};
+//Propiedades de la pelota
+const ball = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  width: grid,
+  height: grid,
+  resetting: false,
+  dx: ballSpeed,
+  dy: -ballSpeed
+};
+//Colision x1,x2
+function collides(obj1, obj2) {
+  return obj1.x < obj2.x + obj2.width &&
+         obj1.x + obj1.width > obj2.x &&
+         obj1.y < obj2.y + obj2.height &&
+         obj1.y + obj1.height > obj2.y;
+}
+//Bucle del Juego
+function loop() {
+  requestAnimationFrame(loop);
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  pala1.y += pala1.dy;
+  pala2.y += pala2.dy;
+  
+  //Limites
+  if (pala1.y < grid) {
+    pala1.y = grid;
+  }
+  else if (pala1.y > maxpala) {
+    pala1.y = maxpala;
+  }
+  if (pala2.y < grid) {
+    pala2.y = grid;
+  }
+  else if (pala2.y > maxpala) {
+    pala2.y = maxpala;
+  }
+  //Palas
+  ctx.fillStyle = color1;
+  ctx.fillRect(pala1.x, pala1.y, pala1.width, palasize);
+  ctx.fillStyle = color2;
+  ctx.fillRect(pala2.x, pala2.y, pala2.width, palasize);
+  ctx.fillStyle = color3;
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  if (ball.y < grid) {
+    ball.y = grid;
+    ball.dy *= -1;
+  }
+  else if (ball.y + grid > canvas.height - grid) {
+    ball.y = canvas.height - grid * 2;
+    ball.dy *= -1;
+  }
+
+  if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
+        if ( ball.x < 0) {
+            score2 ++;
+        }
+        if ( ball.x > canvas.width) {
+            score1 ++;
+        }
+      ball.resetting = false;
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+  }
+
+  if (collides(ball, pala1)) {
+    ball.dx *= -1;
+
+    ball.x = pala1.x + pala1.width;
+  }
+  else if (collides(ball, pala2)) {
+    ball.dx *= -1;
+
+    ball.x = pala2.x - ball.width;
+  }
+  // Bola
+    ctx.fillStyle = color3;
+    ctx.beginPath();
+    ctx.arc(ball.x,ball.y, ball.height/2, 0, 2 * Math.PI);
+     // ctx.stroke();
+    ctx.closePath();
+    ctx.fill();
+   // ctx.arc(10,30, 50, 0,Math.PI*2, true);
+  // Game board
+    ctx.fillStyle = colorlines;
+    ctx.fillRect(0, 0, canvas.width, grid);
+    ctx.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
+
+  // Line
+    for (let i = grid; i < canvas.height - grid; i += grid * 2) {
+      ctx.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
+    }
+    //Player Names
+        ctx.font = '15pt Arial';
+      ctx.textAlign = "center"; // 
+      ctx.fillStyle = color1;
+      ctx.fillText(player1 + ": " + score1, canvas.width/4, 40);
+      ctx.fillText(controls1, canvas.width/4, canvas.height-20);
+      ctx.fillStyle = "white";
+
+      ctx.fillStyle = color2;
+      ctx.fillText(player2 + ": " + score2, (canvas.width-(canvas.width/4)), 40);
+      ctx.fillText(controls2, (canvas.width-(canvas.width/4)), canvas.height-20);
+}
+
+//controls1 = Jugador Izquierdo
+//controls2 = Jugador Derecho
+document.addEventListener('keydown', function(e) {
+    if(controls1 === "← ↑ → ↓"){
+        if (e.which === 38) {
+          pala1.dy = -paddleSpeed;
+        }
+        else if (e.which === 40) {
+          pala1.dy = paddleSpeed;
+        }
+    }
+    if(controls1 === "WASD"){
+        if (e.which === 87) {
+          pala1.dy = -paddleSpeed;
+        }
+        else if (e.which === 83) {
+          pala1.dy = paddleSpeed;
+        }
+    }
+    if(controls2 === "← ↑ → ↓"){
+        if (e.which === 38) {
+          pala2.dy = -paddleSpeed;
+        }
+        else if (e.which === 40) {
+          pala2.dy = paddleSpeed;
+        }
+    }
+    if(controls2 === "WASD"){
+        if (e.which === 87) {
+          pala2.dy = -paddleSpeed;
+        }
+        else if (e.which === 83) {
+          pala2.dy = paddleSpeed;
+        }
+    }
+});
+//Detener Pala al soltar
+document.addEventListener('keyup', function(e) {
+  if (e.which === 38 || e.which === 40) {
+    pala2.dy = 0;
+  }
+
+  if (e.which === 83 || e.which === 87) {
+    pala1.dy = 0;
+  }
+});
+//Volver a cargar la pagina
+function ReloadGame(){
+    location.reload();
+}
+//Comenzar Juego
+function StartGame(){
+  size = document.getElementById('size').value;
+  tampala = size;
+  palasize = size;
+  loop(); 
+  color1 = document.getElementById('color1').value;
+  color2 = document.getElementById('color2').value;
+  color3 = document.getElementById('colorball').value;
+  colorbackground = document.getElementById('colorbackground').value;
+  document.getElementById('iniciar').disabled = true;
+  document.getElementById('update').disabled = false;
+  document.body.style.background = colorbackground;
+  player1 = document.getElementById('player1').value;
+  player2 = document.getElementById('player2').value;
+  ballspeed = document.getElementById('speed').value;
+  controls1 = document.getElementById('control1').value;
+  controls2 = document.getElementById('control2').value;
+  ball.dx = 5;
+  ball.dx = parseInt(ballspeed);
+  if(checkBackground(document.body.style.background) === 'light'){
+      document.getElementById('mysidemenu').className = "mysidemenudark";
+  }else{
+       document.getElementById('mysidemenu').className = "mysidemenu";
+  }
+}
+//Cargar Valores
+function SavePreferences(){
+    localStorage.setItem("color1",document.getElementById('color1').value);
+    localStorage.setItem("color2",document.getElementById('color2').value);
+    localStorage.setItem("colorball",document.getElementById('colorball').value);
+    localStorage.setItem("colorbackground",document.getElementById('colorbackground').value);
+    localStorage.setItem("player1",document.getElementById('player1').value);
+    localStorage.setItem("player2",document.getElementById('player2').value);
+    localStorage.setItem("speed",document.getElementById('speed').value);
+    localStorage.setItem("size",document.getElementById('size').value);
+    localStorage.setItem("controls1",document.getElementById('controls1').value);
+    localStorage.setItem("controls2",document.getElementById('controls2').value);
+}
+//Guardar los valores
+function LoadPreferences(){
+    document.getElementById('color1').value = localStorage.getItem("color1");
+    document.getElementById('color2').value = localStorage.getItem("color2");
+    document.getElementById('colorball').value = localStorage.getItem("colorball");
+    document.getElementById('colorbackground').value = localStorage.getItem("colorbackground");
+    document.getElementById('player1').value = localStorage.getItem("player1");
+    document.getElementById('player2').value = localStorage.getItem("player2");
+    document.getElementById('size').value = localStorage.getItem("size");
+    document.getElementById('speed').value = localStorage.getItem("speed");
+    document.getElementById('controls1').value = localStorage.getItem("controls1");
+    document.getElementById('controls2').value = localStorage.getItem("controls2");
+}
+//Función para saber si el fondo es oscuro o brillante
+function checkBackground(color){
+    var r, g, b, hsp;
+    
+    if (color.match(/^rgb/)) {
+
+        color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+        
+        r = color[1];
+        g = color[2];
+        b = color[3];
+    }
+    hsp = Math.sqrt(
+    0.299 * (r * r) +
+    0.587 * (g * g) +
+    0.114 * (b * b)
+    );
+    if (hsp>127.5) {
+        return 'light';
+    } 
+    else {
+        return 'dark';
+    }
+}
+</script>
+</body>
+</html>
