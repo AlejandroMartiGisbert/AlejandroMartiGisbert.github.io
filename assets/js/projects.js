@@ -15,6 +15,12 @@ $('.showall').click(function(){
     document.getElementById("project7").style.display = "block";
     document.getElementById("project8").style.display = "block";
     document.getElementById("project9").style.display = "block";
+	document.getElementById("project10").style.display = "block";
+    document.getElementById("project11").style.display = "block";
+    document.getElementById("project12").style.display = "block";
+	document.getElementById("project13").style.display = "block";
+    document.getElementById("project14").style.display = "block";
+    document.getElementById("project15").style.display = "block";
 });
 
 $('.showvideogame').click(function(){
@@ -27,6 +33,12 @@ $('.showvideogame').click(function(){
     document.getElementById("project7").style.display = "none";
     document.getElementById("project8").style.display = "none";
     document.getElementById("project9").style.display = "none";
+	document.getElementById("project10").style.display = "block";
+    document.getElementById("project11").style.display = "block";
+    document.getElementById("project12").style.display = "block";
+	document.getElementById("project13").style.display = "block";
+    document.getElementById("project14").style.display = "block";
+    document.getElementById("project15").style.display = "none";
 });
 
 $('.showcollege').click(function(){
@@ -39,18 +51,30 @@ $('.showcollege').click(function(){
     document.getElementById("project7").style.display = "none";
     document.getElementById("project8").style.display = "none";
     document.getElementById("project9").style.display = "none";
+	document.getElementById("project10").style.display = "block";
+    document.getElementById("project11").style.display = "block";
+    document.getElementById("project12").style.display = "block";
+	document.getElementById("project13").style.display = "none";
+    document.getElementById("project14").style.display = "none";
+    document.getElementById("project15").style.display = "block";
 });
 
 $('.show3d').click(function(){
-    document.getElementById("project1").style.display = "none";
-    document.getElementById("project2").style.display = "none";
-    document.getElementById("project3").style.display = "none";
+    document.getElementById("project1").style.display = "block";
+    document.getElementById("project2").style.display = "block";
+    document.getElementById("project3").style.display = "block";
     document.getElementById("project4").style.display = "none";
     document.getElementById("project5").style.display = "none";
     document.getElementById("project6").style.display = "none";
-    document.getElementById("project7").style.display = "block";
-    document.getElementById("project8").style.display = "block";
-    document.getElementById("project9").style.display = "block";
+    document.getElementById("project7").style.display = "none";
+    document.getElementById("project8").style.display = "none";
+    document.getElementById("project9").style.display = "none";
+	document.getElementById("project10").style.display = "none";
+    document.getElementById("project11").style.display = "none";
+    document.getElementById("project12").style.display = "none";
+	document.getElementById("project13").style.display = "none";
+    document.getElementById("project14").style.display = "none";
+    document.getElementById("project15").style.display = "none";
 });
 /*
 <a class="showall">All</a>
