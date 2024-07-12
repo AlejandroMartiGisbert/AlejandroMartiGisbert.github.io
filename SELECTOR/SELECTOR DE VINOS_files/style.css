@@ -21,7 +21,6 @@
 }
 .card .image-box img {
 	height: 100%;
-	max-width: 90%;
   border-radius: 8px 8px 0 0;
 }
 .card .profile-details {
@@ -197,7 +196,6 @@ img, video {
 	padding:0px;
 }
         .image-box {
-            width: 200px; /* Set the desired width */
             height: 90%; /* Set the desired height */
             /*overflow: hidden;*/ /* Hide any overflow */
             display: flex;
