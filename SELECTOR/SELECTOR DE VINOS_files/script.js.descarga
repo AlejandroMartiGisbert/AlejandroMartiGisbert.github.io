@@ -1,0 +1,327 @@
+var swiper = new Swiper(".slide-container", {
+  slidesPerView: 5,
+  spaceBetween: 1,
+  sliderPerGroup: 4,
+  loop: false,
+  centerSlide: "true",
+  fade: "true",
+  loopAddBlankSlides : true,
+  mousewheel: {
+    invert: true,
+  },
+  grabCursor: "true",
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  breakpoints: {
+  0: {
+    slidesPerView: 2,
+    spaceBetween: 0,
+  },
+  480: { // Small mobile devices
+    slidesPerView: 2,
+    spaceBetween: 0,
+  },
+  640: { // Medium mobile devices
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  768: { // Tablets
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  1024: { // Small desktops
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  1280: { // Medium desktops
+    slidesPerView: 6,
+    spaceBetween: 0,
+  },
+  1440: { // Large desktops
+    slidesPerView: 7,
+    spaceBetween: 0,
+  },
+  1600: { // Extra large desktops
+    slidesPerView: 8,
+    spaceBetween: 0,
+  },
+},
+});
+const dropdownButtons = document.querySelectorAll('.dropdown-button');
+const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+
+dropdownButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const menu = button.nextElementSibling;
+        dropdownMenus.forEach((menu) => {
+            menu.classList.add('hidden');
+        });
+        menu.classList.toggle('hidden');
+    });
+
+    // Agrega este evento para el hover
+    button.addEventListener('mouseenter', () => {
+        const menu = button.nextElementSibling;
+        dropdownMenus.forEach((menu) => {
+            menu.classList.add('hidden');
+        });
+        menu.classList.remove('hidden');
+    });
+});
+
+document.addEventListener('click', (event) => {
+    const isDropdownButton = event.target.classList.contains('dropdown-button');
+    dropdownMenus.forEach((menu) => {
+        if (!menu.contains(event.target) && !isDropdownButton) {
+            menu.classList.add('hidden');
+        }
+    });
+});
+
+const itemContainer = document.querySelector('.swiper').swiper;
+
+const filterLinks = document.querySelectorAll('.filter-link');
+
+filterLinks.forEach(link => {
+	link.addEventListener('click', handleFilterClick);
+});
+
+function handleFilterClick(event) {
+    const filterType = event.target.getAttribute('data-filtertype'); // e.g., 'tam'
+    const filterValue = event.target.getAttribute('data-filtertype-value'); // e.g., '75cl'
+
+   // console.log(filterValue + " - " + filterType);
+    // Filter your items based on the selected value
+    filterElements(filterType, filterValue);
+    // Update the display (e.g., hide/show items)
+    // updateItemDisplay(filteredItems);
+	    // Update the button text with the clicked link's text
+    const buttonText = event.target.innerText;
+    
+    // Get the parent element of the clicked link
+    const parentElement = event.target.parentElement;
+    
+    // Get the previous sibling (element preceding the parent)
+    const previousSibling = parentElement.previousElementSibling;
+    
+    // Update the text of the previous sibling
+    if (previousSibling) {
+        previousSibling.innerText = buttonText;
+    }	
+	if(filterValue == 'todos')
+	{
+		 previousSibling.innerText =  capitalizeFirstLetter(event.target.getAttribute('data-filtertype'));
+		 if(filterType == 'tam')
+		{
+			 previousSibling.innerText =  "Tamaño";
+		}
+	}
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function filterElements(filterType, filterValue) {
+    // Get all botella elements
+    const botellas = document.querySelectorAll('.botella');
+	if(filterValue == 'todos')
+	{
+		botellas.forEach(botella => {
+				if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "regiones"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+		});
+	}
+	else
+	{
+		// Loop through each botella
+		botellas.forEach(botella => {
+			const botellaAttribute = botella.getAttribute(`data-${filterType}`);
+			
+			if (botellaAttribute === filterValue) {
+				console. log(botellaAttribute + " - " + filterValue+ " - " + filterType);
+				// Show the botella
+				//botella.style.display = 'flex';
+				if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "region"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+				
+			} else {
+				if(filterType === "pais"){botella.classList.add('filtro1');}
+				if(filterType === "region"){botella.classList.add('filtro2');}
+				if(filterType === "tipo"){botella.classList.add('filtro3');}
+				if(filterType === "tam"){botella.classList.add('filtro4');}
+				// Hide the botella
+				//botella.style.display = 'none';
+				//botella.classList.remove('filtro4');
+			}
+		});
+	}
+	swiper.update();
+}
+
+wines=document.getElementById("wineswiper");
+header=document.getElementById("header");
+var imageid;
+var imgdetail = document.getElementById("img-detail");
+
+window.openModal = function(modalId,imgid,name,uvas,pais,region,tipo, anyada, elaborador, tam,curiosidades,notas) {
+	var modalElement = document.getElementById(modalId);
+	var imageclick = document.getElementById(imgid);
+	imageid = imgid;
+	imgdetail.src = imageclick.src;
+	//console.log();
+	updateModalValues(name,uvas, pais, region, tipo, anyada, elaborador, tam,curiosidades,notas);
+	document.getElementById(modalId).style.display = 'block'
+	document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+	 wines.style.display = 'none';
+	 header.style.display = 'none';
+}
+
+window.closeModal = function(modalId) {
+	document.getElementById(modalId).style.display = 'none'
+	document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+	wines.style.display = 'flex';
+	header.style.display = 'block';
+}
+
+// Close all modals when press ESC
+document.onkeydown = function(event) {
+	event = event || window.event;
+	if (event.keyCode === 27) {
+		document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+		let modals = document.getElementsByClassName('modal');
+		Array.prototype.slice.call(modals).forEach(i => {
+			i.style.display = 'none';
+			wines.style.display = 'flex';
+			header.style.display = 'block';
+		})
+	}
+};
+function openTab(evt, tabName) {
+	var i, tabcontent, tablinks;
+	document.getElementById("notas").style.display = "none";
+	document.getElementById("curiosidades").style.display = "none";
+	document.getElementById(tabName).style.display = "block";
+	document.getElementById("curiosidadesbutton").style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    document.getElementById("notasbutton").style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+//	evt.target.style.opacity = 0.7;
+	//evt.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+	evt.target.style.backgroundColor = 'rgba(241, 241, 241, 0.2)';
+}
+function updateModalValues(name, uvas, pais, region, tipo, anyada, elaborador, tamanyo,curiosidades,notas) {
+    document.getElementById("dato-nombre").textContent = name;
+	document.getElementById("dato-tipo").textContent = tipo;
+    document.getElementById("dato-uvas").textContent = uvas;
+    document.getElementById("dato-region").textContent = region;
+    document.getElementById("dato-pais").textContent = pais;
+    document.getElementById("dato-anyada").textContent = anyada;
+    document.getElementById("dato-elaborador").textContent = elaborador;
+    document.getElementById("dato-tamanyo").textContent = tamanyo;
+	document.getElementById("curiosidades").textContent = curiosidades;
+	document.getElementById("notas").textContent = notas;
+}
+/* Set the width of the side navigation to 250px */
+var open = false;
+function openNav() {
+	
+	if(open)
+	{
+		closeNav();
+		open = false;
+	}else
+	{
+		 document.getElementById("mySidenav").style.width = "10%";
+		 open = true;
+	}
+ 
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+let previousLink = null;
+
+function changeColwawdor(event, sortBy) {
+	if (previousLink) {
+		previousLink.style.color = "#818181"; // Reset previous link color
+	}
+	event.target.style.color = "#f1f1f1"; // Set clicked link color
+	previousLink = event.target; // Store the current link as previous
+    const cardWrapper = document.querySelector('.card-wrapper');
+    const cards = Array.from(cardWrapper.querySelectorAll('.card'));
+
+    switch (sortBy) {
+        case 'precio':
+            cards.sort((a, b) => a.dataset.precio - b.dataset.precio);
+            break;
+        case 'tipo':
+            cards.sort((a, b) => a.dataset.tipo.localeCompare(b.dataset.tipo));
+            break;
+        case 'cantidad':
+            cards.sort((a, b) => {
+                const aTam = parseInt(a.dataset.tam.replace('cl', ''));
+                const bTam = parseInt(b.dataset.tam.replace('cl', ''));
+                return aTam - bTam;
+            });
+            break;
+        case 'defecto':
+            // No sorting needed; keep the original order
+            break;
+        default:
+            // Invalid sortBy value; do nothing
+            return;
+    }
+
+    // Rearrange the cards in the DOM
+    cardWrapper.innerHTML = '';
+    cards.forEach((card) => cardWrapper.appendChild(card));
+	swiper.update();
+}
+function changeColor(event, sortBy) {
+    const cardWrapper = document.querySelector('.card-wrapper');
+    const cards = Array.from(cardWrapper.querySelectorAll('.card'));
+
+    switch (sortBy) {
+        case 'precio':
+            cards.sort((a, b) => a.dataset.precio - b.dataset.precio);
+            break;
+        case 'tipo':
+            cards.sort((a, b) => a.dataset.tipo.localeCompare(b.dataset.tipo));
+            break;
+        case 'cantidad':
+            cards.sort((a, b) => {
+                const aTam = parseInt(a.dataset.tam.replace('cl', ''));
+                const bTam = parseInt(b.dataset.tam.replace('cl', ''));
+                return aTam - bTam;
+            });
+            break;
+        case 'defecto':
+            // No sorting needed; keep the original order
+            break;
+        default:
+            // Invalid sortBy value; do nothing
+            return;
+    }
+
+    // Rearrange the cards in the DOM
+    cardWrapper.innerHTML = '';
+    cards.forEach((card, index) => {
+        cardWrapper.appendChild(card);
+        card.setAttribute('aria-label', `${index + 1} / ${cards.length}`);
+        card.setAttribute('data-swiper-slide-index', index.toString());
+    });
+	swiper.slideTo(0, 0, false)
+	swiper.update();
+}
