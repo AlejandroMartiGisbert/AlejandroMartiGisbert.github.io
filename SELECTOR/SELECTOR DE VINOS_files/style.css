@@ -21,6 +21,7 @@
 }
 .card .image-box img {
 	height: 100%;
+  /*	max-width: 90%;*/
   border-radius: 8px 8px 0 0;
 }
 .card .profile-details {
@@ -148,15 +149,15 @@ body {
     width: 100%;
     height: calc(100vh - 120px); /* Adjust based on header and footer height */
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column; */
     align-items: center;
     justify-content: center;
     margin-top: 60px; /* Adjust based on header height */
-    margin-bottom: 60px; /* Adjust based on footer height */
+   /* margin-bottom: 60px;  Adjust based on footer height */
     overflow: auto;
 }
 
-.swiper {
+.swiperlineal {
 height: 100%;
 /* 	height: 130rem;*/
     width: 100%;
@@ -196,6 +197,7 @@ img, video {
 	padding:0px;
 }
         .image-box {
+            width: 200px; /* Set the desired width */
             height: 90%; /* Set the desired height */
             /*overflow: hidden;*/ /* Hide any overflow */
             display: flex;
@@ -705,16 +707,16 @@ select option {
      background-color: grey;
 }
 .filtro1{
-	display:none !important;
+	/*display:none !important; */
 }
 .filtro2{
-	display:none !important;
+	/*display:none !important; */
 }
 .filtro3{
-	display:none !important;
+	/*display:none !important; */
 }
 .filtro4{
-	display:none !important;
+	/*display:none !important; */
 }
 #imagecontainer
 {
@@ -800,10 +802,13 @@ p
     bottom: 0.1rem;
     left: 0;
     height: 12vh;
-    background-image: url(ruta-de-la-imagen.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     padding-bottom: 10%;
+}
+.bottleshadow img{
+	display: block;
+    margin: auto;
 }
 
 .container::before {
@@ -858,4 +863,21 @@ p
 #main {
   transition: margin-left .5s;
   padding: 20px;
+}
+.content{
+    height: 28rem;
+    width: 25rem;
+    background-color: #1b1f2a;
+    border: .2rem solid rgba(255,255,255,.1);
+    border-radius: .7rem;
+    border-bottom: .4rem solid #0099ff;
+    border-top: .4rem solid #0099ff;
+    overflow: hidden;
+    /* padding: .2rem; */
+}
+
+.content img{
+    width: 100%;
+    border-bottom-left-radius: .6rem;
+    border-bottom-right-radius: .6rem;
 }

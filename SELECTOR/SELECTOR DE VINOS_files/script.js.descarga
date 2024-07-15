@@ -1,8 +1,34 @@
+
 var swiper = new Swiper(".slide-container", {
+  effect: "coverflow",
+  grabCursor: true,
+  centeredSlides: true,
+  loop:true,
+  slidesPerView: 6,
+  centerSlide: "true",
+  slideToClickedSlide: false,
+  centerInsufficientSlides: false,
+  loopAddBlankSlides: false,
+    navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 60,
+    modifier: 2.5,
+    slideShadows: false,
+  },
+
+});
+
+/*
+swiper = Swiper(".slide-container", {
   slidesPerView: 5,
   spaceBetween: 1,
   sliderPerGroup: 4,
-  loop: false,
+  loop: true,
   centerSlide: "true",
   fade: "true",
   loopAddBlankSlides : true,
@@ -55,48 +81,62 @@ var swiper = new Swiper(".slide-container", {
   },
 },
 });
-const dropdownButtons = document.querySelectorAll('.dropdown-button');
-const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+*/
+function initiallisteners()
+{
+	var dropdownButtons = document.querySelectorAll('.dropdown-button');
+	var dropdownMenus = document.querySelectorAll('.dropdown-menu');
+	var hidedropdown = false;
+	var hidebutton = false;
+		dropdownButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			var menu = button.nextElementSibling;
+			dropdownMenus.forEach((menu) => {
+				menu.classList.add('hidden');
+			});
+			menu.classList.toggle('hidden');
+		});
 
-dropdownButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const menu = button.nextElementSibling;
-        dropdownMenus.forEach((menu) => {
-            menu.classList.add('hidden');
-        });
-        menu.classList.toggle('hidden');
+		// Agrega este evento para el hover
+		button.addEventListener('mouseenter', () => {
+			var menu = button.nextElementSibling;
+			dropdownMenus.forEach((menu) => {
+				menu.classList.add('hidden');
+			});
+			menu.classList.remove('hidden');
+			hidebutton = false;
+		});
+		button.addEventListener('mouseleave', () => {
+			hidebutton = true;
+		});
+	
+});
+dropdownMenus.forEach((dropdownMenu) => {
+	dropdownMenu.addEventListener('mouseleave', () => {
+        hidedropdown = true;
+		if(hidedropdown && hidebutton)
+		{
+			 dropdownMenu.classList.toggle('hidden');
+		}
     });
-
-    // Agrega este evento para el hover
-    button.addEventListener('mouseenter', () => {
-        const menu = button.nextElementSibling;
-        dropdownMenus.forEach((menu) => {
-            menu.classList.add('hidden');
-        });
-        menu.classList.remove('hidden');
+	dropdownMenu.addEventListener('mouseenter', () => {
+        hidedropdown = false;
     });
 });
+var itemContainer = document.querySelector('.swiper').swiper;
 
-document.addEventListener('click', (event) => {
-    const isDropdownButton = event.target.classList.contains('dropdown-button');
-    dropdownMenus.forEach((menu) => {
-        if (!menu.contains(event.target) && !isDropdownButton) {
-            menu.classList.add('hidden');
-        }
-    });
-});
-
-const itemContainer = document.querySelector('.swiper').swiper;
-
-const filterLinks = document.querySelectorAll('.filter-link');
+var filterLinks = document.querySelectorAll('.filter-link');
 
 filterLinks.forEach(link => {
 	link.addEventListener('click', handleFilterClick);
 });
+}
+initiallisteners();
+
 
 function handleFilterClick(event) {
-    const filterType = event.target.getAttribute('data-filtertype'); // e.g., 'tam'
-    const filterValue = event.target.getAttribute('data-filtertype-value'); // e.g., '75cl'
+    var filterType = event.target.getAttribute('data-filtertype'); // e.g., 'tam'
+    var filterValue = event.target.getAttribute('data-filtertype-value'); // e.g., '75cl'
 
    // console.log(filterValue + " - " + filterType);
     // Filter your items based on the selected value
@@ -104,13 +144,13 @@ function handleFilterClick(event) {
     // Update the display (e.g., hide/show items)
     // updateItemDisplay(filteredItems);
 	    // Update the button text with the clicked link's text
-    const buttonText = event.target.innerText;
+    var buttonText = event.target.innerText;
     
     // Get the parent element of the clicked link
-    const parentElement = event.target.parentElement;
+    var parentElement = event.target.parentElement;
     
     // Get the previous sibling (element preceding the parent)
-    const previousSibling = parentElement.previousElementSibling;
+    var previousSibling = parentElement.previousElementSibling;
     
     // Update the text of the previous sibling
     if (previousSibling) {
@@ -128,10 +168,22 @@ function handleFilterClick(event) {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
+var nbotellas = 0;
+var botellas = document.querySelectorAll('.botella');
+const wineholder = document.getElementById('wineswiper');
+const winewrapper = document.querySelector('.card-wrapper.swiper-wrapper');
+const hiddenwines = document.getElementById('hiddenWines');
+botellas.forEach(botella => {
+	nbotellas++;
+});
+const innerHtmlArray = [];
+const wineswiper = document.getElementById('wineswiper');
+var outerHtmlArray = [];
 function filterElements(filterType, filterValue) {
-    // Get all botella elements
+	nbotellas = 0;
+	console.log(filterType + " - " + filterValue);
     const botellas = document.querySelectorAll('.botella');
+	
 	if(filterValue == 'todos')
 	{
 		botellas.forEach(botella => {
@@ -143,33 +195,105 @@ function filterElements(filterType, filterValue) {
 	}
 	else
 	{
-		// Loop through each botella
+		nbotellas = 0;
 		botellas.forEach(botella => {
-			const botellaAttribute = botella.getAttribute(`data-${filterType}`);
-			
+			var botellaAttribute = botella.getAttribute(`data-${filterType}`);
 			if (botellaAttribute === filterValue) {
-				console. log(botellaAttribute + " - " + filterValue+ " - " + filterType);
-				// Show the botella
-				//botella.style.display = 'flex';
-				if(filterType === "pais"){botella.classList.remove('filtro1');}
+			    if(filterType === "pais"){botella.classList.remove('filtro1');}
 				if(filterType === "region"){botella.classList.remove('filtro2');}
 				if(filterType === "tipo"){botella.classList.remove('filtro3');}
 				if(filterType === "tam"){botella.classList.remove('filtro4');}
+
 				
 			} else {
 				if(filterType === "pais"){botella.classList.add('filtro1');}
 				if(filterType === "region"){botella.classList.add('filtro2');}
 				if(filterType === "tipo"){botella.classList.add('filtro3');}
 				if(filterType === "tam"){botella.classList.add('filtro4');}
-				// Hide the botella
-				//botella.style.display = 'none';
-				//botella.classList.remove('filtro4');
 			}
+			
 		});
 	}
-	swiper.update();
+    botellas.forEach(botella => {
+		if (
+			botella.classList.contains('filtro1') ||
+			botella.classList.contains('filtro2') ||
+			botella.classList.contains('filtro3') ||
+			botella.classList.contains('filtro4')
+		) {
+			hiddenwines.appendChild(botella);
+		} else {
+			winewrapper.appendChild(botella);nbotellas++;
+		}
+		/*
+        var botellaAttribute = botella.getAttribute(`data-${filterType}`);
+
+		if (botellaAttribute === filterValue) 
+		{
+			winewrapper.appendChild(botella);nbotellas++;
+		}
+		else
+		{
+			
+			hiddenwines.appendChild(botella);
+		*/
+    });
+
+swiperUpdate();
 }
 
+
+/*
+function filterElements(filterType, filterValue) {
+    // Get all botella elements
+    
+	if(filterValue == 'todos')
+	{
+		botellas.forEach(botella => {
+				if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "regiones"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+		});
+	}
+	else
+	{
+		nbotellas = 0;
+		// Loop through each botella
+		botellas.forEach(botella => {
+			var botellaAttribute = botella.getAttribute(`data-${filterType}`);
+			if (botellaAttribute === filterValue) {
+				console. log(botellaAttribute + " - " + filterValue+ " - " + filterType);
+			    if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "region"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+
+				
+			} else {
+				if(filterType === "pais"){botella.classList.add('filtro1');}
+				if(filterType === "region"){botella.classList.add('filtro2');}
+				if(filterType === "tipo"){botella.classList.add('filtro3');}
+				if(filterType === "tam"){botella.classList.add('filtro4');}
+			}
+			
+		});
+	}
+	console.log(nbotellas);
+	if(nbotellas>=4 && nbotellas<swiper.params.slidesPerView)
+	{
+		//swiper.params.slidesPerView = nbotellas;
+	}
+	else
+	{
+		//swiper.params.slidesPerView = 5;
+	}
+	var botellaswrapper = document.querySelectorAll('.swiper-wrapper');
+	//botellaswrapper.style.transform=translate3d(0, 0, 0);
+	swiper.update();
+	
+}
+*/
 wines=document.getElementById("wineswiper");
 header=document.getElementById("header");
 var imageid;
@@ -253,45 +377,10 @@ function closeNav() {
 }
 let previousLink = null;
 
-function changeColwawdor(event, sortBy) {
-	if (previousLink) {
-		previousLink.style.color = "#818181"; // Reset previous link color
-	}
-	event.target.style.color = "#f1f1f1"; // Set clicked link color
-	previousLink = event.target; // Store the current link as previous
-    const cardWrapper = document.querySelector('.card-wrapper');
-    const cards = Array.from(cardWrapper.querySelectorAll('.card'));
-
-    switch (sortBy) {
-        case 'precio':
-            cards.sort((a, b) => a.dataset.precio - b.dataset.precio);
-            break;
-        case 'tipo':
-            cards.sort((a, b) => a.dataset.tipo.localeCompare(b.dataset.tipo));
-            break;
-        case 'cantidad':
-            cards.sort((a, b) => {
-                const aTam = parseInt(a.dataset.tam.replace('cl', ''));
-                const bTam = parseInt(b.dataset.tam.replace('cl', ''));
-                return aTam - bTam;
-            });
-            break;
-        case 'defecto':
-            // No sorting needed; keep the original order
-            break;
-        default:
-            // Invalid sortBy value; do nothing
-            return;
-    }
-
-    // Rearrange the cards in the DOM
-    cardWrapper.innerHTML = '';
-    cards.forEach((card) => cardWrapper.appendChild(card));
-	swiper.update();
-}
 function changeColor(event, sortBy) {
-    const cardWrapper = document.querySelector('.card-wrapper');
-    const cards = Array.from(cardWrapper.querySelectorAll('.card'));
+	console.log(sortBy);
+    var cardWrapper = document.querySelector('.card-wrapper');
+    var cards = Array.from(cardWrapper.querySelectorAll('.card'));
 
     switch (sortBy) {
         case 'precio':
@@ -302,26 +391,174 @@ function changeColor(event, sortBy) {
             break;
         case 'cantidad':
             cards.sort((a, b) => {
-                const aTam = parseInt(a.dataset.tam.replace('cl', ''));
-                const bTam = parseInt(b.dataset.tam.replace('cl', ''));
+                var aTam = parseInt(a.dataset.tam.replace('cl', ''));
+                var bTam = parseInt(b.dataset.tam.replace('cl', ''));
                 return aTam - bTam;
             });
             break;
         case 'defecto':
             // No sorting needed; keep the original order
             break;
+		case 'vistacircular':
+			console.log("circular");
+			changeview("circular");
+			break;
+		case 'vistalineal':
+			console.log("lineal");
+			changeview("lineal");
+			break;
         default:
             // Invalid sortBy value; do nothing
             return;
     }
 
     // Rearrange the cards in the DOM
+	
     cardWrapper.innerHTML = '';
     cards.forEach((card, index) => {
         cardWrapper.appendChild(card);
         card.setAttribute('aria-label', `${index + 1} / ${cards.length}`);
         card.setAttribute('data-swiper-slide-index', index.toString());
     });
-	swiper.slideTo(0, 0, false)
-	swiper.update();
+	swiperUpdate();
+	openNav();
+}
+
+
+function changeview(view)
+{
+
+	if (view === "lineal") 
+	{
+		swiper.params.coverflowEffect.depth = 0;
+		swiper.params.loopAddBlankSlides=true;
+		swiper.params.loop=true;
+		 swiper.params.sliderPerGroup=4;
+		/*//swiper.update();
+		
+		var swiper = new Swiper(".slide-container", {
+		  slidesPerView: 5,
+		  spaceBetween: 1,
+		  sliderPerGroup: 4,
+		  loop: true,
+		  centerSlide: "true",
+		  fade: "true",
+		  loopAddBlankSlides : false,
+		  effect: "default",
+		  mousewheel: {
+			invert: true,
+		  },
+		  grabCursor: "true",
+		  pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+			dynamicBullets: true,
+		  },
+		  navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		  },
+
+		  breakpoints: {
+		  0: {
+			slidesPerView: 2,
+			spaceBetween: 0,
+		  },
+		  480: { // Small mobile devices
+			slidesPerView: 2,
+			spaceBetween: 0,
+		  },
+		  640: { // Medium mobile devices
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  768: { // Tablets
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  1024: { // Small desktops
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  1280: { // Medium desktops
+			slidesPerView: 6,
+			spaceBetween: 0,
+		  },
+		  1440: { // Large desktops
+			slidesPerView: 7,
+			spaceBetween: 0,
+		  },
+		  1600: { // Extra large desktops
+			slidesPerView: 8,
+			spaceBetween: 0,
+		  },
+		},
+		});
+		*/
+    } else if (view === "circular") 
+	{
+		swiper.params.coverflowEffect.depth = 60;
+
+		//swiper.update();
+		/*
+		var swiper = new Swiper(".slide-container", {
+			  effect: "coverflow",
+		  grabCursor: true,
+		  centeredSlides: true,
+		  loop:true,
+		  slidesPerView: "auto",
+		  coverflowEffect: {
+			rotate: 0,
+			stretch: 0,
+			depth: 150,
+			modifier: 2.5,
+			slideShadows: true,
+		  },
+
+		});
+		
+		var swiper = new Swiper(".slide-container", {
+			effect: "coverflow",
+			coverflowEffect: {
+				rotate: 0,
+				stretch: 0,
+				depth: 150,
+				modifier: 2.5,
+				slideShadows: true,
+			  },
+
+		});
+		/*itemContainer.params.effect = "coverflow";
+		itemContainer.params.grabCursor = true;
+		itemContainer.params.centeredSlides = true;
+		itemContainer.params.loop = true;
+		itemContainer.params.slidesPerView = "auto";
+		itemContainer.params.coverflowEffect = {
+			rotate: 0,
+			stretch: 0,
+			depth: 150,
+			modifier: 2.5,
+			slideShadows: true
+		};
+		*/
+	}
+//	swiperUpdate();
+	//itemContainer = document.querySelector('.swiper').swiper;
+}
+function swiperUpdate()
+{
+	if(nbotellas<8)
+	{
+		swiper.params.slidesPerView = nbotellas;
+		swiper.params.loop=false;
+	}
+	else
+	{
+		swiper.params.slidesPerView = 5;
+		swiper.params.loop=true;
+	}
+	var middle = Math.floor(nbotellas / 2);
+	console.log("nbotellas: " + nbotellas + "middle:: " + middle);
+	swiper.update(true);
+	swiper.slideTo(middle);
 }
