@@ -1,0 +1,564 @@
+
+var swiper = new Swiper(".slide-container", {
+  effect: "coverflow",
+  grabCursor: true,
+  centeredSlides: true,
+  loop:true,
+  slidesPerView: 6,
+  centerSlide: "true",
+  slideToClickedSlide: false,
+  centerInsufficientSlides: false,
+  loopAddBlankSlides: false,
+    navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 60,
+    modifier: 2.5,
+    slideShadows: false,
+  },
+
+});
+
+/*
+swiper = Swiper(".slide-container", {
+  slidesPerView: 5,
+  spaceBetween: 1,
+  sliderPerGroup: 4,
+  loop: true,
+  centerSlide: "true",
+  fade: "true",
+  loopAddBlankSlides : true,
+  mousewheel: {
+    invert: true,
+  },
+  grabCursor: "true",
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  breakpoints: {
+  0: {
+    slidesPerView: 2,
+    spaceBetween: 0,
+  },
+  480: { // Small mobile devices
+    slidesPerView: 2,
+    spaceBetween: 0,
+  },
+  640: { // Medium mobile devices
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  768: { // Tablets
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  1024: { // Small desktops
+    slidesPerView: 5,
+    spaceBetween: 0,
+  },
+  1280: { // Medium desktops
+    slidesPerView: 6,
+    spaceBetween: 0,
+  },
+  1440: { // Large desktops
+    slidesPerView: 7,
+    spaceBetween: 0,
+  },
+  1600: { // Extra large desktops
+    slidesPerView: 8,
+    spaceBetween: 0,
+  },
+},
+});
+*/
+function initiallisteners()
+{
+	var dropdownButtons = document.querySelectorAll('.dropdown-button');
+	var dropdownMenus = document.querySelectorAll('.dropdown-menu');
+	var hidedropdown = false;
+	var hidebutton = false;
+		dropdownButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			var menu = button.nextElementSibling;
+			dropdownMenus.forEach((menu) => {
+				menu.classList.add('hidden');
+			});
+			menu.classList.toggle('hidden');
+		});
+
+		// Agrega este evento para el hover
+		button.addEventListener('mouseenter', () => {
+			var menu = button.nextElementSibling;
+			dropdownMenus.forEach((menu) => {
+				menu.classList.add('hidden');
+			});
+			menu.classList.remove('hidden');
+			hidebutton = false;
+		});
+		button.addEventListener('mouseleave', () => {
+			hidebutton = true;
+		});
+	
+});
+dropdownMenus.forEach((dropdownMenu) => {
+	dropdownMenu.addEventListener('mouseleave', () => {
+        hidedropdown = true;
+		if(hidedropdown && hidebutton)
+		{
+			 dropdownMenu.classList.toggle('hidden');
+		}
+    });
+	dropdownMenu.addEventListener('mouseenter', () => {
+        hidedropdown = false;
+    });
+});
+var itemContainer = document.querySelector('.swiper').swiper;
+
+var filterLinks = document.querySelectorAll('.filter-link');
+
+filterLinks.forEach(link => {
+	link.addEventListener('click', handleFilterClick);
+});
+}
+initiallisteners();
+
+
+function handleFilterClick(event) {
+    var filterType = event.target.getAttribute('data-filtertype'); // e.g., 'tam'
+    var filterValue = event.target.getAttribute('data-filtertype-value'); // e.g., '75cl'
+
+   // console.log(filterValue + " - " + filterType);
+    // Filter your items based on the selected value
+    filterElements(filterType, filterValue);
+    // Update the display (e.g., hide/show items)
+    // updateItemDisplay(filteredItems);
+	    // Update the button text with the clicked link's text
+    var buttonText = event.target.innerText;
+    
+    // Get the parent element of the clicked link
+    var parentElement = event.target.parentElement;
+    
+    // Get the previous sibling (element preceding the parent)
+    var previousSibling = parentElement.previousElementSibling;
+    
+    // Update the text of the previous sibling
+    if (previousSibling) {
+        previousSibling.innerText = buttonText;
+    }	
+	if(filterValue == 'todos')
+	{
+		 previousSibling.innerText =  capitalizeFirstLetter(event.target.getAttribute('data-filtertype'));
+		 if(filterType == 'tam')
+		{
+			 previousSibling.innerText =  "Tamaño";
+		}
+	}
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+var nbotellas = 0;
+var botellas = document.querySelectorAll('.botella');
+const wineholder = document.getElementById('wineswiper');
+const winewrapper = document.querySelector('.card-wrapper.swiper-wrapper');
+const hiddenwines = document.getElementById('hiddenWines');
+botellas.forEach(botella => {
+	nbotellas++;
+});
+const innerHtmlArray = [];
+const wineswiper = document.getElementById('wineswiper');
+var outerHtmlArray = [];
+function filterElements(filterType, filterValue) {
+	nbotellas = 0;
+	console.log(filterType + " - " + filterValue);
+    const botellas = document.querySelectorAll('.botella');
+	
+	if(filterValue == 'todos')
+	{
+		botellas.forEach(botella => {
+				if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "regiones"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+		});
+	}
+	else
+	{
+		nbotellas = 0;
+		botellas.forEach(botella => {
+			var botellaAttribute = botella.getAttribute(`data-${filterType}`);
+			if (botellaAttribute === filterValue) {
+			    if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "region"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+
+				
+			} else {
+				if(filterType === "pais"){botella.classList.add('filtro1');}
+				if(filterType === "region"){botella.classList.add('filtro2');}
+				if(filterType === "tipo"){botella.classList.add('filtro3');}
+				if(filterType === "tam"){botella.classList.add('filtro4');}
+			}
+			
+		});
+	}
+    botellas.forEach(botella => {
+		if (
+			botella.classList.contains('filtro1') ||
+			botella.classList.contains('filtro2') ||
+			botella.classList.contains('filtro3') ||
+			botella.classList.contains('filtro4')
+		) {
+			hiddenwines.appendChild(botella);
+		} else {
+			winewrapper.appendChild(botella);nbotellas++;
+		}
+		/*
+        var botellaAttribute = botella.getAttribute(`data-${filterType}`);
+
+		if (botellaAttribute === filterValue) 
+		{
+			winewrapper.appendChild(botella);nbotellas++;
+		}
+		else
+		{
+			
+			hiddenwines.appendChild(botella);
+		*/
+    });
+
+swiperUpdate();
+}
+
+
+/*
+function filterElements(filterType, filterValue) {
+    // Get all botella elements
+    
+	if(filterValue == 'todos')
+	{
+		botellas.forEach(botella => {
+				if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "regiones"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+		});
+	}
+	else
+	{
+		nbotellas = 0;
+		// Loop through each botella
+		botellas.forEach(botella => {
+			var botellaAttribute = botella.getAttribute(`data-${filterType}`);
+			if (botellaAttribute === filterValue) {
+				console. log(botellaAttribute + " - " + filterValue+ " - " + filterType);
+			    if(filterType === "pais"){botella.classList.remove('filtro1');}
+				if(filterType === "region"){botella.classList.remove('filtro2');}
+				if(filterType === "tipo"){botella.classList.remove('filtro3');}
+				if(filterType === "tam"){botella.classList.remove('filtro4');}
+
+				
+			} else {
+				if(filterType === "pais"){botella.classList.add('filtro1');}
+				if(filterType === "region"){botella.classList.add('filtro2');}
+				if(filterType === "tipo"){botella.classList.add('filtro3');}
+				if(filterType === "tam"){botella.classList.add('filtro4');}
+			}
+			
+		});
+	}
+	console.log(nbotellas);
+	if(nbotellas>=4 && nbotellas<swiper.params.slidesPerView)
+	{
+		//swiper.params.slidesPerView = nbotellas;
+	}
+	else
+	{
+		//swiper.params.slidesPerView = 5;
+	}
+	var botellaswrapper = document.querySelectorAll('.swiper-wrapper');
+	//botellaswrapper.style.transform=translate3d(0, 0, 0);
+	swiper.update();
+	
+}
+*/
+wines=document.getElementById("wineswiper");
+header=document.getElementById("header");
+var imageid;
+var imgdetail = document.getElementById("img-detail");
+
+window.openModal = function(modalId,imgid,name,uvas,pais,region,tipo, anyada, elaborador, tam,curiosidades,notas) {
+	var modalElement = document.getElementById(modalId);
+	var imageclick = document.getElementById(imgid);
+	imageid = imgid;
+	imgdetail.src = imageclick.src;
+	//console.log();
+	updateModalValues(name,uvas, pais, region, tipo, anyada, elaborador, tam,curiosidades,notas);
+	document.getElementById(modalId).style.display = 'block'
+	document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+	 wines.style.display = 'none';
+	 header.style.display = 'none';
+}
+
+window.closeModal = function(modalId) {
+	document.getElementById(modalId).style.display = 'none'
+	document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+	wines.style.display = 'flex';
+	header.style.display = 'block';
+}
+
+// Close all modals when press ESC
+document.onkeydown = function(event) {
+	event = event || window.event;
+	if (event.keyCode === 27) {
+		document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+		let modals = document.getElementsByClassName('modal');
+		Array.prototype.slice.call(modals).forEach(i => {
+			i.style.display = 'none';
+			wines.style.display = 'flex';
+			header.style.display = 'block';
+		})
+	}
+};
+function openTab(evt, tabName) {
+	var i, tabcontent, tablinks;
+	document.getElementById("notas").style.display = "none";
+	document.getElementById("curiosidades").style.display = "none";
+	document.getElementById(tabName).style.display = "block";
+	document.getElementById("curiosidadesbutton").style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    document.getElementById("notasbutton").style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+//	evt.target.style.opacity = 0.7;
+	//evt.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+	evt.target.style.backgroundColor = 'rgba(241, 241, 241, 0.2)';
+}
+function updateModalValues(name, uvas, pais, region, tipo, anyada, elaborador, tamanyo,curiosidades,notas) {
+    document.getElementById("dato-nombre").textContent = name;
+	document.getElementById("dato-tipo").textContent = tipo;
+    document.getElementById("dato-uvas").textContent = uvas;
+    document.getElementById("dato-region").textContent = region;
+    document.getElementById("dato-pais").textContent = pais;
+    document.getElementById("dato-anyada").textContent = anyada;
+    document.getElementById("dato-elaborador").textContent = elaborador;
+    document.getElementById("dato-tamanyo").textContent = tamanyo;
+	document.getElementById("curiosidades").textContent = curiosidades;
+	document.getElementById("notas").textContent = notas;
+}
+/* Set the width of the side navigation to 250px */
+var open = false;
+function openNav() {
+	
+	if(open)
+	{
+		closeNav();
+		open = false;
+	}else
+	{
+		 document.getElementById("mySidenav").style.width = "10%";
+		 open = true;
+	}
+ 
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+let previousLink = null;
+
+function changeColor(event, sortBy) {
+	console.log(sortBy);
+    var cardWrapper = document.querySelector('.card-wrapper');
+    var cards = Array.from(cardWrapper.querySelectorAll('.card'));
+
+    switch (sortBy) {
+        case 'precio':
+            cards.sort((a, b) => a.dataset.precio - b.dataset.precio);
+            break;
+        case 'tipo':
+            cards.sort((a, b) => a.dataset.tipo.localeCompare(b.dataset.tipo));
+            break;
+        case 'cantidad':
+            cards.sort((a, b) => {
+                var aTam = parseInt(a.dataset.tam.replace('cl', ''));
+                var bTam = parseInt(b.dataset.tam.replace('cl', ''));
+                return aTam - bTam;
+            });
+            break;
+        case 'defecto':
+            // No sorting needed; keep the original order
+            break;
+		case 'vistacircular':
+			console.log("circular");
+			changeview("circular");
+			break;
+		case 'vistalineal':
+			console.log("lineal");
+			changeview("lineal");
+			break;
+        default:
+            // Invalid sortBy value; do nothing
+            return;
+    }
+
+    // Rearrange the cards in the DOM
+	
+    cardWrapper.innerHTML = '';
+    cards.forEach((card, index) => {
+        cardWrapper.appendChild(card);
+        card.setAttribute('aria-label', `${index + 1} / ${cards.length}`);
+        card.setAttribute('data-swiper-slide-index', index.toString());
+    });
+	swiperUpdate();
+	openNav();
+}
+
+
+function changeview(view)
+{
+
+	if (view === "lineal") 
+	{
+		swiper.params.coverflowEffect.depth = 0;
+		swiper.params.loopAddBlankSlides=true;
+		swiper.params.loop=true;
+		 swiper.params.sliderPerGroup=4;
+		/*//swiper.update();
+		
+		var swiper = new Swiper(".slide-container", {
+		  slidesPerView: 5,
+		  spaceBetween: 1,
+		  sliderPerGroup: 4,
+		  loop: true,
+		  centerSlide: "true",
+		  fade: "true",
+		  loopAddBlankSlides : false,
+		  effect: "default",
+		  mousewheel: {
+			invert: true,
+		  },
+		  grabCursor: "true",
+		  pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+			dynamicBullets: true,
+		  },
+		  navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		  },
+
+		  breakpoints: {
+		  0: {
+			slidesPerView: 2,
+			spaceBetween: 0,
+		  },
+		  480: { // Small mobile devices
+			slidesPerView: 2,
+			spaceBetween: 0,
+		  },
+		  640: { // Medium mobile devices
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  768: { // Tablets
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  1024: { // Small desktops
+			slidesPerView: 5,
+			spaceBetween: 0,
+		  },
+		  1280: { // Medium desktops
+			slidesPerView: 6,
+			spaceBetween: 0,
+		  },
+		  1440: { // Large desktops
+			slidesPerView: 7,
+			spaceBetween: 0,
+		  },
+		  1600: { // Extra large desktops
+			slidesPerView: 8,
+			spaceBetween: 0,
+		  },
+		},
+		});
+		*/
+    } else if (view === "circular") 
+	{
+		swiper.params.coverflowEffect.depth = 60;
+
+		//swiper.update();
+		/*
+		var swiper = new Swiper(".slide-container", {
+			  effect: "coverflow",
+		  grabCursor: true,
+		  centeredSlides: true,
+		  loop:true,
+		  slidesPerView: "auto",
+		  coverflowEffect: {
+			rotate: 0,
+			stretch: 0,
+			depth: 150,
+			modifier: 2.5,
+			slideShadows: true,
+		  },
+
+		});
+		
+		var swiper = new Swiper(".slide-container", {
+			effect: "coverflow",
+			coverflowEffect: {
+				rotate: 0,
+				stretch: 0,
+				depth: 150,
+				modifier: 2.5,
+				slideShadows: true,
+			  },
+
+		});
+		/*itemContainer.params.effect = "coverflow";
+		itemContainer.params.grabCursor = true;
+		itemContainer.params.centeredSlides = true;
+		itemContainer.params.loop = true;
+		itemContainer.params.slidesPerView = "auto";
+		itemContainer.params.coverflowEffect = {
+			rotate: 0,
+			stretch: 0,
+			depth: 150,
+			modifier: 2.5,
+			slideShadows: true
+		};
+		*/
+	}
+//	swiperUpdate();
+	//itemContainer = document.querySelector('.swiper').swiper;
+}
+function swiperUpdate()
+{
+	if(nbotellas<8)
+	{
+		swiper.params.slidesPerView = nbotellas;
+		swiper.params.loop=false;
+	}
+	else
+	{
+		swiper.params.slidesPerView = 5;
+		swiper.params.loop=true;
+	}
+	var middle = Math.floor(nbotellas / 2);
+	console.log("nbotellas: " + nbotellas + "middle:: " + middle);
+	swiper.update(true);
+	swiper.slideTo(middle);
+}
