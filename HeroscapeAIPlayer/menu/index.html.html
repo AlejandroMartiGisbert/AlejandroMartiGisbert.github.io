@@ -8,26 +8,20 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
 	<script src="https://kit.fontawesome.com/35e3794076.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="menu/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<main class="site-wrapper" style="overflow: hidden;">
 	<audio id="background-music" loop autoplay>
-    <source src="menu/prologue.mp3" type="audio/mp3">
+    <source src="prologue.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 	</audio>
 </audio>
-<style>
-.container 
-{
-z-index:2
-}
-</style>
   <div class="pt-table desktop-768">
   <button id='play-button' onclick="togglePlayPause()" style="z-index: 1;position: absolute;right: 0;"><i id='iconmusic' class="fa fa-volume-high"></i></button>
    <button id='screen-button' onclick="toggleFullscreen()" style="z-index: 1;position: absolute;left: 0;"><i class="fa fa-expand"></i></button>
    <button id='iconimage' onclick="toggleBackgroundPause()" style="z-index: 1;position: absolute;right: 0;bottom:0"><i class="fa fa-pause"></i></button>
-   <button id='screen-button' onclick="" style="z-index: 1;position: absolute;left: 0;bottom:0"><i class="fa fa-share-nodes"></i></button>
+   <button id='screen-button' onclick="changeMenu()" style="z-index: 1;position: absolute;left: 0;bottom:0"><i class="fa fa-share-nodes"></i></button>
     <div class="pt-table cell page-home relative slideshow-container" style="background-image: url(WJZc6Ej.jpg);
     background-position: center;
     background-size: cover;">
@@ -39,7 +33,9 @@ z-index:2
     display: flex;
     justify-content: center;
 ">
-                        <div id='initial_menu' class="" style="height: 100%;align-content: center;opacity: 1;z-index: 1;
+                        <div id='initial_menu' class="" style="
+    height: 100%;
+    align-content: center;
 ">
                             <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" style="margin: auto;height: 100%;align-content: center;">
                                 <div class="page-title  home text-center">
@@ -56,7 +52,7 @@ z-index:2
                                             <div></div>
                                             <div></div>
                                         </div>
-                                        <a href = "editor.html?showButton=true" class="hex-content">
+                                        <a href = "../index.html?showButton=true" class="hex-content">
                                             <span class="hex-content-inner">
                                                 <span class="icon">
                                                    <i class="fa-solid fa-khanda"></i>
@@ -77,7 +73,7 @@ z-index:2
                                             <div></div>
                                             <div></div>
                                         </div>
-                                        <a href = "editor.html" class="hex-content">
+                                        <a href = "../index.html" class="hex-content">
                                             <span class="hex-content-inner">
                                                 <span class="icon">
                                                     <i class="fa-solid fa-layer-group"></i>
@@ -232,12 +228,12 @@ document.getElementById('background-music').volume = 0.5; // Adjust volume as ne
 document.getElementById('background-music').muted = false
 const slideshowContainer = document.querySelector('.slideshow-container');
 const images = [
-    'menu/Heroscape1.jpg',
-    'menu/Heroscape2.jpg',
-    'menu/Heroscape3.jpg',
-	'menu/Heroscape4.jpg',
-	'menu/Heroscape5.jpg',
-	'menu/Heroscape6.jpeg',
+    'Heroscape1.jpg',
+    'Heroscape2.jpg',
+    'Heroscape3.jpg',
+	'Heroscape4.jpg',
+	'Heroscape5.jpg',
+	'Heroscape6.jpeg',
 ];
 
 let currentIndex = 0;
@@ -246,7 +242,6 @@ function changeBackgroundImage() {
 	if (!pause)
 	{
 		slideshowContainer.style.backgroundImage = `url(${images[currentIndex]})`;
-
 		currentIndex = (currentIndex + 1) % images.length;
 	}
 }
@@ -322,43 +317,6 @@ changeBackgroundImage();
                 menuDiv.innerHTML = initialContent;
                 menuDiv.style.opacity = 1; // Fade in transition
             }, 500); // Match the transition duration
-        }
-    </script>
-	    <script>
-        function savePreferences() {
-            let bgColor = document.getElementById('bgColor').value;
-            let textColor = document.getElementById('textColor').value;
-
-            localStorage.setItem('bgColor', bgColor);
-            localStorage.setItem('textColor', textColor);
-
-            applyPreferences();
-        }
-
-        function applyPreferences() {
-            let bgColor = localStorage.getItem('bgColor');
-            let textColor = localStorage.getItem('textColor');
-
-            if (bgColor) document.body.style.backgroundColor = bgColor;
-            if (textColor) document.body.style.color = textColor;
-        }
-
-        // Apply preferences when the page loads
-        window.onload = applyPreferences;
-    </script>
-	    <script>
-        let selectedMap = null;
-
-        function updateSelection(mapNumber, imageSrc) {
-            selectedMap = mapNumber;
-            document.getElementById('display-image').src = imageSrc;
-            document.getElementById('dynamic-button').style.display = "block";
-        }
-
-        function redirect() {
-            if (selectedMap) {
-                window.location.href = `Heroscape/editor.html?selectedmap=${selectedMap}`;
-            }
         }
     </script>
 </html>
